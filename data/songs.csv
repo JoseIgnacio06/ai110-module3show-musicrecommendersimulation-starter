@@ -9,3 +9,13 @@ id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness
 8,Night Drive Loop,Neon Echo,synthwave,moody,0.75,110,0.49,0.73,0.22
 9,Focus Flow,LoRoom,lofi,focused,0.40,80,0.59,0.60,0.78
 10,Rooftop Lights,Indigo Parade,indie pop,happy,0.76,124,0.81,0.82,0.35
+11,City Hustle,MC Frontier,hip-hop,energetic,0.85,95,0.72,0.91,0.08
+12,Velvet Morning,Luna Sade,r&b,romantic,0.58,88,0.78,0.76,0.42
+13,Autumn Sonata,The Vienna Collective,classical,melancholic,0.31,66,0.28,0.32,0.98
+14,Iron Horizon,Vortex Machine,metal,angry,0.97,168,0.22,0.58,0.04
+15,Dirt Road Sunday,Wade Holloway,country,nostalgic,0.52,96,0.68,0.63,0.74
+16,Willow and Rain,Ember Fields,folk,peaceful,0.29,74,0.55,0.44,0.93
+17,Neon Cascade,Pulse Reactor,edm,euphoric,0.96,138,0.89,0.95,0.02
+18,Broken Compass,Ray Hollins,blues,sad,0.44,76,0.18,0.48,0.82
+19,Fuego Suave,Cali Rhythm,latin,romantic,0.88,104,0.86,0.93,0.12
+20,Static Jungle,Fractal Drop,drum and bass,tense,0.92,174,0.35,0.78,0.03

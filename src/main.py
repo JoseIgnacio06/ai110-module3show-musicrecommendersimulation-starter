@@ -18,11 +18,52 @@ DATA_PATH = Path(__file__).parent.parent / "data" / "songs.csv"
 
 WIDTH = 60
 
+# ---------------------------------------------------------------------------
+# User profiles — each dict describes one listener's taste.
+# Add or edit entries here to test different preference combinations.
+# Keys used by the scoring function: genre, mood, energy, acousticness, tempo_bpm
+# ---------------------------------------------------------------------------
+PROFILES = [
+    {
+        "name": "High-Energy Pop",
+        "genre": "pop",
+        "mood": "happy",
+        "energy": 0.85,
+        "acousticness": 0.10,
+        "tempo_bpm": 125,
+    },
+    {
+        "name": "Chill Lofi",
+        "genre": "lofi",
+        "mood": "chill",
+        "energy": 0.38,
+        "acousticness": 0.80,
+        "tempo_bpm": 78,
+    },
+    {
+        "name": "Deep Intense Rock",
+        "genre": "rock",
+        "mood": "intense",
+        "energy": 0.92,
+        "acousticness": 0.08,
+        "tempo_bpm": 155,
+    },
+    {
+        "name": "Late Night Jazz",
+        "genre": "jazz",
+        "mood": "relaxed",
+        "energy": 0.37,
+        "acousticness": 0.88,
+        "tempo_bpm": 88,
+    },
+]
+
 
 def print_header(user_prefs: dict) -> None:
     """Prints the profile banner shown above the results."""
+    name = user_prefs.get("name", "Custom Profile")
     print("=" * WIDTH)
-    print("  MUSIC RECOMMENDER — TOP PICKS FOR YOU")
+    print(f"  {name.upper()}")
     print("=" * WIDTH)
     profile_line = (
         f"  Genre: {user_prefs.get('genre', '—')}  |  "
@@ -46,21 +87,12 @@ def main() -> None:
     songs = load_songs(str(DATA_PATH))
     print(f"Loaded {len(songs)} songs from catalog.\n")
 
-    user_prefs = {
-        "genre": "pop",
-        "mood": "happy",
-        "energy": 0.8,
-        "acousticness": 0.20,
-        "tempo_bpm": 120,
-    }
-
-    recommendations = recommend_songs(user_prefs, songs, k=5)
-
-    print_header(user_prefs)
-    for rank, (song, score, explanation) in enumerate(recommendations, start=1):
-        print_recommendation(rank, song, score, explanation)
-
-    print(f"\n{'=' * WIDTH}")
+    for profile in PROFILES:
+        recommendations = recommend_songs(profile, songs, k=3)
+        print_header(profile)
+        for rank, (song, score, explanation) in enumerate(recommendations, start=1):
+            print_recommendation(rank, song, score, explanation)
+        print(f"\n{'=' * WIDTH}\n")
 
 
 if __name__ == "__main__":

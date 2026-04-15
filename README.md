@@ -21,9 +21,37 @@ Explain your design in plain language.
  
 - What features does each `Song` use in your system
   - For example: genre, mood, energy, tempo
+  genre, mood, energy, tempo, valence, danceability, acousticness.
 - What information does your `UserProfile` store
+A profile captures a single listener's taste as a small set of target values:
+
+favorite_genre: the style they gravitate toward most, i.e. "lofi"
+favorite_mood: the emotional feel they want right now, i.e. "chill"
+target_energy: their preferred intensity level, i.e. 0.40 for calm background music
+target_acousticness: whether they prefer organic sound (0.80) or produced/electronic (0.10)
+target_valence: their preferred emotional brightness, i.e. 0.60 for neutral-to-warm
+target_tempo_bpm: their preferred speed, i.e. 80 BPM for unhurried music
+likes_acoustic: a simple true/false flag that complements the acousticness target
+The profile does not store any history, skips, or plays; it is a static snapshot of declared preference, not learned behavior.
+
 - How does your `Recommender` compute a score for each song
+Every song is given a score between 0.0 and 1.0 that represents how well it fits the user's profile. The score is a weighted sum of five individual sub-scores:
+
+total score =
+  35% × mood match
++ 25% × energy match
++ 20% × genre match
++ 15% × acousticness match
++  5% × tempo match
+
 - How do you choose which songs to recommend
+The recommender runs in two stages:
+
+Stage 1: Score every song. The scoring formula runs once for each song in the catalog, producing a scored list of all 20 songs.
+
+Stage 2: Rank and return the top k. The list is sorted from highest to lowest score. The top k songs (default: 5) are returned as the final recommendations.
+
+Songs that match on both mood and genre rise to the top. Songs that share only one of those two drop to the middle. Songs that match on nothing are buried at the bottom regardless of their numeric features.
 
 You can include a simple diagram or bullet list if helpful.
 Some prompts to answer:
@@ -66,6 +94,8 @@ pytest
 You can add more tests in `tests/test_recommender.py`.
 
 ---
+
+---These questions below are already answered in model_card.md---
 
 ## Experiments You Tried
 
